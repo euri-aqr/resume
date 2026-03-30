@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김유리 - Resume</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/variable/pretendardvariable.min.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --ink: #0f172a;
+  --ink2: #334155;
+  --ink3: #64748b;
+  --accent: #4f46e5;
+  --accent-light: #e0e7ff;
+  --teal: #0d9488;
+  --warm: #ea580c;
+  --bg: #ffffff;
+  --bg2: #f8fafc;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg2);
+  -webkit-font-smoothing: antialiased;
+}
+
+.section { padding: 4rem 0; }
+.section.white { background: var(--bg); }
+.section.tinted { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.section-inner { max-width: 760px; margin: 0 auto; padding: 0 2rem; }
+
+.s-label { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 2rem; display: flex; align-items: center; gap: 12px; }
+.s-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+.hero { display: grid; grid-template-columns: 1fr auto; align-items: end; padding: 2rem 0 0; }
+.hero-name { font-size: 42px; font-weight: 800; letter-spacing: -1px; line-height: 1.1; color: var(--ink); }
+.hero-title { font-size: 18px; color: var(--accent); font-weight: 600; margin-top: 10px; }
+.hero-contact { font-size: 13px; color: var(--ink3); margin-top: 10px; font-weight: 500; }
+.hero-right { text-align: right; }
+.hero-stat { font-size: 48px; font-weight: 800; color: var(--accent); line-height: 1; letter-spacing: -1px; }
+.hero-stat-sub { font-size: 12px; font-weight: 600; color: var(--ink3); margin-top: 6px; }
+
+.summary { font-size: 15px; color: var(--ink2); line-height: 1.8; margin-top: 2rem; padding: 1.5rem; background: var(--bg2); border-radius: 12px; border: 1px solid var(--border); }
+
+.pill-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--bg); border: 1px solid var(--border); border-radius: 30px; font-size: 13.5px; font-weight: 600; color: var(--ink2); box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s; }
+.pill:hover { transform: translateY(-1px); box-shadow: var(--shadow-md); border-color: var(--accent-light); }
+.pill svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+.diff-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 2.5rem; }
+.diff-card { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 24px 16px; display: flex; flex-direction: column; align-items: center; text-align: center; box-shadow: var(--shadow-md); }
+.diff-icon { width: 44px; height: 44px; margin-bottom: 16px; }
+.diff-title { font-size: 14px; font-weight: 700; color: var(--ink); line-height: 1.4; margin-bottom: 8px; }
+.diff-desc { font-size: 12px; color: var(--ink3); line-height: 1.6; }
+
+.project { background: var(--bg); border: 1px solid var(--border); border-radius: 16px; padding: 32px; margin-bottom: 24px; box-shadow: var(--shadow-md); }
+.project:last-child { margin-bottom: 0; }
+.p-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+.p-name { font-size: 20px; font-weight: 700; color: var(--ink); }
+.p-role { font-size: 14px; color: var(--accent); font-weight: 600; background: var(--accent-light); padding: 4px 10px; border-radius: 6px; }
+.p-period { font-size: 13px; font-weight: 500; color: var(--ink3); margin-left: auto; }
+.p-desc { font-size: 14.5px; color: var(--ink2); line-height: 1.7; margin-top: 16px; }
+
+.impact-row { display: flex; gap: 12px; margin: 20px 0; flex-wrap: wrap; }
+.impact-card { flex: 1; min-width: 100px; background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; text-align: center; }
+.impact-num { font-size: 24px; font-weight: 800; color: var(--accent); line-height: 1; }
+.impact-label { font-size: 11px; color: var(--ink3); margin-top: 6px; line-height: 1.3; font-weight: 500; }
+
+.j-bar { display: flex; gap: 6px; margin: 28px 0; background: var(--bg2); padding: 8px; border-radius: 12px; border: 1px solid var(--border); }
+.j-step { flex: 1; text-align: center; padding: 14px 6px; border-radius: 8px; background: var(--bg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
+.j-step.live { border-top: 3px solid var(--teal); }
+.j-step.now { border-top: 3px solid var(--warm); background: #fffcfaba; }
+.j-ver { font-size: 13px; font-weight: 800; color: var(--ink); }
+.j-ver .badge { font-size: 9px; padding: 2px 6px; border-radius: 4px; background: var(--teal); color: #fff; font-weight: 700; margin-left: 4px; letter-spacing: 0.5px; }
+.j-ver .badge-now { background: var(--warm); }
+.j-label { font-size: 11px; color: var(--ink3); margin-top: 6px; line-height: 1.4; font-weight: 500; }
+
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px 32px; margin-top: 24px; }
+.di-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--ink); display: flex; align-items: center; gap: 6px; }
+.di-title::before { content: '\2022'; color: var(--accent); font-size: 18px; line-height: 0; }
+.di-desc { font-size: 13.5px; color: var(--ink2); line-height: 1.6; }
+
+.ear-item { display: grid; grid-template-columns: 140px 1fr; gap: 20px; padding: 24px 0; border-bottom: 1px dashed var(--border); }
+.ear-item:last-child { border-bottom: none; }
+.ear-co { font-size: 15px; font-weight: 700; color: var(--ink); }
+.ear-period { font-size: 12px; font-weight: 500; color: var(--ink3); margin-top: 4px; }
+.ear-role { font-size: 14px; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+.ear-desc { font-size: 13.5px; color: var(--ink2); line-height: 1.6; }
+.ear-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.ear-tag { font-size: 11.5px; padding: 4px 10px; border-radius: 6px; background: var(--bg); border: 1px solid var(--border); color: var(--ink2); font-weight: 500; }
+
+.skill-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.sk-cat { font-size: 12px; font-weight: 800; color: var(--accent); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid var(--accent-light); display: inline-block; }
+.sk-list { font-size: 14px; color: var(--ink2); line-height: 1.9; font-weight: 500; }
+
+.edu { font-size: 14.5px; color: var(--ink2); padding: 16px; background: var(--bg); border: 1px solid var(--border); border-radius: 12px; display: inline-block; }
+.edu strong { font-weight: 700; color: var(--ink); }
+
+.user-badge { display: flex; align-items: center; gap: 16px; margin-top: 1.25rem; padding: 14px 20px; background: linear-gradient(135deg, #eef2ff 0%, #f0fdf4 100%); border-radius: 10px; border: 1px solid var(--accent-light); }
+.user-badge-icon { font-size: 22px; flex-shrink: 0; }
+.user-badge-text { font-size: 13.5px; color: var(--ink2); line-height: 1.6; font-weight: 500; }
+.user-badge-text strong { color: var(--ink); font-weight: 700; }
+
+@media print {
+  body { background: #fff; font-size: 12px; }
+  .section { padding: 2rem 0; }
+  .section.tinted { background: #fff; border: none; }
+  .project, .diff-card, .summary { box-shadow: none; border: 1px solid #ccc; }
+  .j-bar { background: #fff; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<div class="section white" style="padding-bottom:2rem">
+  <div class="section-inner">
+    <div class="hero">
+      <div>
+        <div class="hero-name">김유리</div>
+        <div class="hero-title">Product Manager — AI 대화형 서비스 & 플랫폼</div>
+        <div class="hero-contact">Seoul, Korea · alphaaqr@gmail.com · +82-10-3318-4398</div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-stat">5<span style="font-size:18px;font-weight:500;color:var(--ink3)">년차</span></div>
+        <div class="hero-stat-sub">AI Service PM at KRAFTON</div>
+      </div>
+    </div>
+    <div class="summary">
+      10년 이상의 출판·콘텐츠 기획 경험에서 쌓은 서사 구조화 역량과 에디토리얼 감각을 바탕으로, AI 챗봇·컴패니언 서비스의 대화 설계와 페르소나 구축에 강점을 가진 5년차 AI 플랫폼 PM입니다.<br>
+      SaaS 챗봇 도입부터 대화 품질 관리, 사용자 세그먼트별 개인화, Proactive AI 컴패니언 전환까지 대화형 서비스의 전 생애주기를 주도한 경험을 보유하고 있습니다.
+    </div>
+    <div class="user-badge">
+      <span class="user-badge-icon">📚</span>
+      <div class="user-badge-text">
+        <strong>레진코믹스 11년차</strong>(2015~) · <strong>봄툰 9년차</strong>(2017~) 사용자 — 소장 작품 100여 편 이상. 여성향 IP의 독자 심리와 팬덤 구조를 실사용자 관점에서 이해하고 있으며, 웹툰 창작자 커뮤니티에 대한 실질적 이해를 갖추고 있습니다.
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section tinted" style="padding:2rem 0">
+  <div class="section-inner">
+    <div class="s-label">Core competencies</div>
+    <div class="pill-row">
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-5-3v-11l5 3M9 20l6-3M9 20v-11M15 17l5 3v-11l-5-3M15 17v-11M9 9l6-3"/></svg>
+        AI 대화형 서비스 기획 및 UX 설계
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        대화 데이터 분석 및 서비스 품질 관리
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="16" y2="16"/></svg>
+        AI 페르소나·응답 가이드라인 설계
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        사업·개발 부서 간 협업 및 프로젝트 관리
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        콘텐츠 IP 이해 및 서사 구조화
+      </span>
+      <span class="pill">
+        <svg viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        플랫폼 서비스 프론트/백엔드 기획
+      </span>
+    </div>
+  </div>
+</div>
+
+<div class="section white">
+  <div class="section-inner">
+    <div class="s-label">Work experience — KRAFTON</div>
+    <p style="font-size:13px;color:var(--ink2);margin-bottom:1.75rem">게임 퍼블리싱 플랫폼 부문 · Platform Product Manager · 2021 – 현재</p>
+
+    <div class="diff-row">
+      <div class="diff-card">
+        <svg class="diff-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="23 4 23 10 17 10"></polyline>
+          <polyline points="1 20 1 14 7 14"></polyline>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+        </svg>
+        <div class="diff-title">AI 챗봇 서비스 기획<br>6회 이상 반복 개선</div>
+        <div class="diff-desc">대화 품질 관리와 UX 개선을<br>데이터 기반으로 반복 실행</div>
+      </div>
+      <div class="diff-card">
+        <svg class="diff-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path>
+          <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path>
+          <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path>
+          <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+        </svg>
+        <div class="diff-title">FAQ 챗봇에서<br>AI 컴패니언으로 전환</div>
+        <div class="diff-desc">페르소나 설계·개인화를 통해<br>대화형 서비스의 진화를 주도</div>
+      </div>
+      <div class="diff-card">
+        <svg class="diff-icon" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+        <div class="diff-title">콘텐츠 기획 경력<br>+ AI 서비스 PM</div>
+        <div class="diff-desc">콘텐츠 IP 이해와 AI 서비스<br>설계를 동시에 갖춘 기획자</div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="p-head">
+        <span class="p-name">AI 챗봇 / 어시스턴트 서비스</span>
+        <span class="p-role">PM / 제품 책임자</span>
+        <span class="p-period">2025 – 현재</span>
+      </div>
+      <div class="p-desc">크리에이터 플랫폼의 외부 사용자(크리에이터, 파트너)를 대상으로 하는 AI 대화형 서비스입니다. 외부 SaaS 챗봇 솔루션을 선정하여 도입·배포한 뒤, 대화 데이터 분석과 사용자 피드백을 기반으로 4차례에 걸쳐 대화 품질과 UX를 개선했습니다. 현재는 단순 FAQ 챗봇을 넘어, AI 컴패니언이 사용자 맥락을 이해하고 선제적으로 도움을 주는 Proactive AI 서비스로의 전환을 추진하고 있습니다.</div>
+
+      <div class="impact-row">
+        <div class="impact-card"><div class="impact-num">88%</div><div class="impact-label">응답 정확도<br>(목표 80% 초과)</div></div>
+        <div class="impact-card"><div class="impact-num">200+</div><div class="impact-label">사용자 수</div></div>
+        <div class="impact-card"><div class="impact-num">75%</div><div class="impact-label">사용자 만족도</div></div>
+        <div class="impact-card"><div class="impact-num">1.5초</div><div class="impact-label">평균 응답시간</div></div>
+        <div class="impact-card"><div class="impact-num">95%</div><div class="impact-label">응답 일관성</div></div>
+      </div>
+
+      <div class="j-bar">
+        <div class="j-step live"><div class="j-ver">v0.1 <span class="badge">LIVE</span></div><div class="j-label">챗봇<br>도입·배포</div></div>
+        <div class="j-step live"><div class="j-ver">v0.2 <span class="badge">LIVE</span></div><div class="j-label">커스텀 위젯<br>사용자 세분화</div></div>
+        <div class="j-step"><div class="j-ver">v0.3</div><div class="j-label">서비스<br>확장</div></div>
+        <div class="j-step"><div class="j-ver">v0.4</div><div class="j-label">페르소나·<br>개인화 설계</div></div>
+        <div class="j-step"><div class="j-ver">v0.5</div><div class="j-label">대화 데이터<br>분석·최적화</div></div>
+        <div class="j-step now"><div class="j-ver">Now <span class="badge badge-now">진행 중</span></div><div class="j-label">AI 컴패니언<br>전환</div></div>
+      </div>
+
+      <div class="detail-grid">
+        <div><div class="di-title">AI 챗봇 서비스 기획 및 배포</div><div class="di-desc">복수의 AI 챗봇 SaaS 비교·검토 및 최종 솔루션 선정. FAQ 50개 항목과 약관 문서 100여 종 기반의 <strong>지식 베이스(Knowledge Base) 구축</strong> 및 크리에이터 플랫폼 내 <strong>초기 서비스 배포를 주도</strong>했습니다.</div></div>
+        <div><div class="di-title">대화 데이터 분석 및 품질 관리</div><div class="di-desc">대화 로그 데이터를 수집·분석하여 미응답 패턴을 도출했습니다. 문서 구조를 최적화해 <strong>응답 정확도를 65%에서 88%로 상승</strong>시켰으며, 핵심 FAQ 사전 정의를 통해 <strong>응답 일관성 95%</strong>를 확보했습니다.</div></div>
+        <div><div class="di-title">AI 페르소나 설계 및 가이드라인</div><div class="di-desc">서비스 성격에 맞는 <strong>AI 페르소나를 정의</strong>하고, LLM 에이전트 프롬프트 정책을 설계하여 <strong>대화 톤앤매너의 일관성을 확보</strong>했습니다.</div></div>
+        <div><div class="di-title">사용자 세그먼트별 개인화</div><div class="di-desc"><strong>커스텀 위젯 UI를 자체 개발</strong>하여 브랜드 경험을 통일하고, 비로그인/일반/파트너 등 <strong>유저 세그먼트에 따라 맞춤형 대화 흐름이 제공되는 구조</strong>를 기획했습니다.</div></div>
+        <div><div class="di-title">AI 컴패니언 서비스 전환 추진</div><div class="di-desc">단순 FAQ 응답을 넘어, 맥락을 이해하고 선제적으로 도움을 주는 <strong>Proactive AI 서비스로의 전환</strong>을 추진 중입니다. 사용자 여정 기반의 인터랙션 시나리오를 설계하고 있습니다.</div></div>
+        <div><div class="di-title">팀 빌딩 및 서비스 확장</div><div class="di-desc">7인 규모의 프로젝트 팀 빌딩 및 관리 환경을 구축했습니다. 동일 프레임워크를 계정 서비스로 확장 적용하여 <strong>멀티 서비스 대화형 플랫폼 구조를 설계</strong>했습니다.</div></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="p-head">
+        <span class="p-name">전사 데이터 통합 플랫폼 (Minerva)</span>
+        <span class="p-role">PM</span>
+        <span class="p-period">2021 – 2024</span>
+      </div>
+      <div class="p-desc">전사 임직원이 데이터, 용어, 비즈니스 지표를 자연어로 검색하고 탐색할 수 있는 데이터 플랫폼입니다. Slack 자연어 챗봇, 사내 정보 통합 검색 포털, 게임·데이터 용어사전, 데이터 큐레이션 포털의 서비스 기획과 운영을 총괄했습니다. 대화형 인터페이스(챗봇)부터 탐색형 포털까지 다양한 플랫폼 서비스 구축 경험을 쌓았습니다.</div>
+
+      <div class="impact-row">
+        <div class="impact-card"><div class="impact-num">15+</div><div class="impact-label">KPI 자연어 질의 연동</div></div>
+        <div class="impact-card"><div class="impact-num">9<span style="font-size:16px;">개월</span></div><div class="impact-label">5회 반복 릴리즈 (v0.1~0.5)</div></div>
+        <div class="impact-card"><div class="impact-num">100%</div><div class="impact-label">피드백 Jira 티켓 해소</div></div>
+      </div>
+
+      <div class="detail-grid">
+        <div><div class="di-title">자연어 질의 Slack 챗봇 (Owlet) 구축</div><div class="di-desc"><strong>15개 이상의 KPI 지표와 8개 필터 필드를 자연어로 질의</strong>하는 챗봇 서비스를 구축했습니다. 9개월간 5회(v0.1→v0.5) 반복 릴리즈하며, <strong>사용 범위를 팀(DSU)에서 부서(PDU), 전사로 단계적 확대</strong>했습니다.</div></div>
+        <div><div class="di-title">구조적 피드백 수집 및 100% 해소</div><div class="di-desc">매 버전마다 구조화된 피드백 수집 프로세스를 운영했습니다. 수집된 피드백을 <strong>전건 Jira 티켓으로 전환하여 100% 추적 및 해소</strong>했으며, 이를 통해 한글 지원, 가독성 개선, 구독 기능, 날짜 제안 등의 핵심 기능을 도출했습니다.</div></div>
+        <div><div class="di-title">사용자 커뮤니티 주도 프로덕트 성장</div><div class="di-desc">'minerva-with-serendipity'와 같은 <strong>사용자 커뮤니티 채널을 기획·운영</strong>하여, 사용자의 아이디어를 프로덕트에 즉시 반영하는 활발한 피드백 루프를 구축했습니다.</div></div>
+        <div><div class="di-title">게임·데이터 용어사전 기획</div><div class="di-desc">사내 정보 비대칭 해소를 위해 게임 및 데이터 지표 용어를 통합 관리하는 사전 서비스를 구축하여 <strong>4회(v0.1→v0.3) 반복 릴리즈</strong>를 운영했습니다.</div></div>
+        <div><div class="di-title">사내 정보 통합 검색 & 큐레이션</div><div class="di-desc">위키, 이슈 트래커, 코드 저장소 등 흩어진 <strong>사내 정보를 한 곳에서 검색하는 포털</strong>과 사내 분석 보고서를 탐색할 수 있는 <strong>데이터 큐레이션 포털</strong>의 요구사항 및 UX를 정의했습니다. 직접 데이터를 큐레이션하고 콘텐츠를 선정하여 아티클을 발행했습니다.</div></div>
+        <div><div class="di-title">Phase 2 — 전사 분석 대시보드</div><div class="di-desc">데이터 플랫폼의 탐색 경험을 확장하여 전사 분석 대시보드 베타 버전을 기획. 주요 지표의 시각화 구조를 설계하고 사용자 피드백을 수집했습니다.</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section tinted">
+  <div class="section-inner">
+    <div class="s-label">Earlier career</div>
+
+    <div class="ear-item">
+      <div><div class="ear-co">금성출판사</div><div class="ear-period">2014 – 2017</div></div>
+      <div>
+        <div class="ear-role">기자 / 콘텐츠 기획·편집</div>
+        <div class="ear-desc">어린이·교육 월간지 3종을 1인 체제로 기획·편집·취재. 연 1회 전면 개편 프로젝트 병행. 《오! 한국사 인물 만화》 전 24권 리뉴얼 — IP 시리즈의 콘텐츠 구조와 캐릭터 일관성을 관리. 《마음으로 보는 그림》 아트북 시리즈 신규 기획.</div>
+      </div>
+    </div>
+    <div class="ear-item">
+      <div><div class="ear-co">부천국제만화축제</div><div class="ear-period">2007 – 2013</div></div>
+      <div>
+        <div class="ear-role">홍보·마케팅 PD</div>
+        <div class="ear-desc">만화·웹툰·애니메이션 산업의 글로벌 행사 홍보 전략 수립 및 운영. 언론 노출 전년 대비 125% 증가, 온라인 페이지뷰 100만 건 이상(87% 성장). 콘텐츠 IP 기반 행사 기획, 공식 기자회견 기획 및 운영, VIP 의전, 언론 대응, 기자단·자원활동단 운영.</div>
+      </div>
+    </div>
+    <div class="ear-item" style="border-bottom:none">
+      <div><div class="ear-co">프리랜서 활동</div><div class="ear-period">2007 – 2020</div></div>
+      <div>
+        <div class="ear-role">편집자 · 기고 — 민음사 / 웅진지식하우스 / 리디북스 / 위즈덤하우스 외</div>
+        <div class="ear-desc">정규직과 병행하며 단행본·전자책 편집, 윤문, 교정교열, 콘텐츠 저작권 관리, 잡지 기고 활동을 지속.</div>
+        <div style="font-size:11px;color:var(--ink);font-weight:500;margin-top:10px;margin-bottom:4px">편집</div>
+        <div class="ear-tags">
+          <span class="ear-tag">『문학의 광장: 중국 문학의 파노라마』</span><span class="ear-tag">『민음한국사: 15세기, 조선의 때 이른 절정』</span><span class="ear-tag">『민음한국사: 16세기, 성리학 유토피아』</span><span class="ear-tag">『그리스 로마 신화』 전 6권</span><span class="ear-tag">『중국 물질 문화사』</span><span class="ear-tag">『Rising Strong』</span>
+        </div>
+        <div style="font-size:11px;color:var(--ink);font-weight:500;margin-top:10px;margin-bottom:4px">기고</div>
+        <div class="ear-tags">
+          <span class="ear-tag">《코믹타운》 객원 필자</span><span class="ear-tag">굿네이버스 《좋은 이웃》</span><span class="ear-tag">《시니어스 타임즈》</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section white">
+  <div class="section-inner">
+    <div class="s-label">Skills & tools</div>
+    <div class="skill-grid">
+      <div><div class="sk-cat">AI / 대화형 서비스</div><div class="sk-list">AI 챗봇 서비스 기획<br>대화 시나리오 설계<br>LLM 응답 가이드라인 수립<br>대화 데이터 분석·품질 관리<br>AI 페르소나 설계</div></div>
+      <div><div class="sk-cat">콘텐츠 / 기획</div><div class="sk-list">콘텐츠 IP 구조화<br>서사 기획·에디토리얼<br>사용자 여정 기획<br>서비스 기획서 작성<br>프론트/백엔드 기획</div></div>
+      <div><div class="sk-cat">Tools</div><div class="sk-list">Jira · Confluence<br>Figma · Slack<br>Datadog</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section tinted" style="padding:2.5rem 0">
+  <div class="section-inner">
+    <div class="s-label">Education</div>
+    <div class="edu"><strong>단국대학교</strong> · 예술·조형학부 도예과 학사 · 2006</div>
+  </div>
+</div>
+
+</body>
+</html>
