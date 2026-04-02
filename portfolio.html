@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>김유리 — Portfolio</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pretendard/1.3.9/variable/pretendardvariable.min.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --ink: #0f172a;
+  --ink2: #334155;
+  --ink3: #64748b;
+  --accent: #4f46e5;
+  --accent-light: #e0e7ff;
+  --teal: #0d9488;
+  --teal-light: #ccfbf1;
+  --warm: #ea580c;
+  --warm-light: #fff7ed;
+  --bg: #ffffff;
+  --bg2: #f8fafc;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.8;
+}
+
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 2rem; }
+section { padding: 4rem 0; scroll-margin-top: 120px; }
+section.tinted { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+/* Hero — compact for sticky */
+.hero { padding: 3rem 0 1.5rem; text-align: center; }
+.hero-name { font-size: 14px; font-weight: 700; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; }
+.hero-title { font-size: 36px; font-weight: 800; color: var(--ink); line-height: 1.3; letter-spacing: -0.5px; margin-bottom: 1rem; }
+.hero-sub { font-size: 16px; color: var(--ink2); line-height: 1.8; max-width: 560px; margin: 0 auto; }
+
+/* ★ STICKY NAV — 스크롤 시 상단 고정 */
+.sticky-nav { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); transform: translateY(-100%); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.2s; pointer-events: none; }
+.sticky-nav.visible { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.sticky-nav.scrolled { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.sticky-nav-inner { max-width: 720px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; gap: 16px; height: 56px; }
+.sticky-nav-title { font-size: 15px; font-weight: 800; color: var(--ink); white-space: nowrap; letter-spacing: -0.3px; }
+.sticky-nav-links { display: flex; gap: 6px; margin-left: auto; }
+.sticky-nav-links a { font-size: 12.5px; font-weight: 600; color: var(--ink3); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: all 0.15s; white-space: nowrap; }
+.sticky-nav-links a:hover, .sticky-nav-links a.active { color: var(--accent); background: var(--accent-light); }
+
+/* TOC in hero area */
+.toc { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; padding: 1.5rem 0 2rem; }
+.toc a { display: inline-block; padding: 10px 20px; border: 1px solid var(--border); border-radius: 10px; font-size: 13.5px; font-weight: 600; color: var(--ink2); text-decoration: none; transition: all 0.2s; }
+.toc a:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.toc a .toc-num { color: var(--accent); margin-right: 6px; }
+
+/* Section headers */
+.s-label { font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 0.5rem; }
+.s-title { font-size: 28px; font-weight: 800; color: var(--ink); line-height: 1.3; margin-bottom: 1rem; letter-spacing: -0.3px; }
+
+/* KEY STRIP */
+.key-strip { display: flex; gap: 0; margin-bottom: 2.5rem; border-radius: 14px; overflow: hidden; border: 1px solid var(--border); }
+.key-strip-item { flex: 1; padding: 20px 16px; text-align: center; background: var(--bg2); border-right: 1px solid var(--border); }
+.key-strip-item:last-child { border-right: none; }
+.key-strip-num { font-size: 28px; font-weight: 800; color: var(--accent); line-height: 1; }
+.key-strip-label { font-size: 11.5px; color: var(--ink3); margin-top: 6px; font-weight: 600; line-height: 1.3; }
+
+/* HIGHLIGHT MARK */
+mark { background: var(--accent-light); color: var(--ink); padding: 2px 6px; border-radius: 4px; font-weight: 700; text-decoration: none; }
+mark.teal { background: var(--teal-light); }
+mark.warm { background: var(--warm-light); }
+
+/* CHAPTER MARKER */
+.chapter { display: flex; align-items: center; gap: 12px; margin: 3rem 0 1.25rem; }
+.chapter-tag { font-size: 11px; font-weight: 800; color: #fff; background: var(--accent); padding: 4px 10px; border-radius: 6px; letter-spacing: 0.5px; white-space: nowrap; }
+.chapter-tag.teal { background: var(--teal); }
+.chapter-tag.warm { background: var(--warm); }
+.chapter-text { font-size: 20px; font-weight: 800; color: var(--ink); line-height: 1.3; }
+
+/* Narrative text */
+p { font-size: 15px; color: var(--ink2); margin-bottom: 1.25rem; word-break: keep-all; }
+p strong { color: var(--ink); font-weight: 700; }
+
+ul { margin: 0.75rem 0 1.5rem 1.25rem; }
+li { font-size: 14.5px; color: var(--ink2); line-height: 1.7; margin-bottom: 0.5rem; }
+li strong { color: var(--ink); font-weight: 700; }
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 14px; }
+th { background: var(--bg2); font-weight: 700; color: var(--ink); text-align: left; padding: 12px 16px; border-bottom: 2px solid var(--border); }
+td { padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--ink2); vertical-align: top; line-height: 1.6; }
+
+/* Magazine section table (여백 개선) */
+.mag-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2rem; }
+.mag-table td { padding: 16px 12px; border-bottom: 1px dashed var(--border); }
+.mag-table tr:last-child td { border-bottom: none; }
+.mag-table td:first-child { font-weight: 700; color: var(--accent); width: 130px; font-size: 13.5px; }
+.mag-table td:nth-child(2) { font-weight: 700; color: var(--ink); width: 160px; }
+
+/* Callout */
+.callout { background: var(--bg2); border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0; padding: 1.25rem 1.5rem; margin: 1.5rem 0; font-size: 14.5px; color: var(--ink2); line-height: 1.7; }
+.callout strong { color: var(--ink); }
+
+/* Do/Don't (테두리 부드럽게) */
+.do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 1rem 0 1.5rem; }
+.do, .dont { padding: 14px 18px; border-radius: 10px; font-size: 13.5px; line-height: 1.6; }
+.do { background: #f0fdf4; border: 1px solid rgba(22, 101, 52, 0.15); color: #166534; }
+.dont { background: #fef2f2; border: 1px solid rgba(153, 27, 27, 0.15); color: #991b1b; }
+
+/* Persona cards */
+.persona-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 1.5rem 0; }
+.persona-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px 16px; text-align: center; }
+.persona-card h4 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.persona-card p { font-size: 12.5px; color: var(--ink3); line-height: 1.5; margin: 0; }
+
+/* ★ Idea Cards (유저 상상 서비스) */
+.idea-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 1.5rem 0 2rem; }
+.idea-card { background: var(--bg); border: 1px solid var(--accent-light); border-radius: 14px; padding: 24px 20px; box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; }
+.idea-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); border-color: var(--accent); }
+.idea-icon { font-size: 22px; margin-bottom: 14px; display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--bg2); border-radius: 10px; border: 1px solid var(--border); }
+.idea-card h4 { font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 10px; line-height: 1.3; }
+.idea-card p { font-size: 13.5px; color: var(--ink2); line-height: 1.6; margin: 0; }
+
+/* Quote block */
+.quote { font-size: 15px; color: var(--ink); font-weight: 500; line-height: 1.8; padding: 1.5rem 2rem; background: linear-gradient(135deg, #eef2ff 0%, #f0fdf4 100%); border-radius: 12px; margin: 2rem 0; border: 1px solid var(--accent-light); }
+
+/* TAKEAWAY */
+.takeaway { margin: 2.5rem 0 0; padding: 2rem; background: var(--ink); border-radius: 16px; color: #fff; }
+.takeaway h4 { font-size: 13px; font-weight: 700; color: var(--accent-light); margin-bottom: 1rem; letter-spacing: 1px; text-transform: uppercase; }
+.takeaway table { margin: 0; }
+.takeaway th { background: rgba(255,255,255,0.05); color: #fff; border-bottom-color: rgba(255,255,255,0.1); }
+.takeaway td { color: rgba(255,255,255,0.8); border-bottom-color: rgba(255,255,255,0.08); }
+.takeaway td strong { color: #fff; }
+
+/* Footer */
+footer { padding: 4rem 0 3rem; text-align: center; }
+footer .wrap { font-size: 12px; color: var(--ink3); }
+.link-bar { display: flex; justify-content: center; gap: 12px; margin-bottom: 2rem; flex-wrap: wrap; }
+.link-bar a { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; background: var(--accent); color: #fff; font-size: 14px; font-weight: 700; border-radius: 10px; text-decoration: none; transition: background 0.2s; }
+.link-bar a:hover { background: #4338ca; }
+.link-bar a.secondary { background: var(--bg2); color: var(--ink2); border: 1px solid var(--border); }
+.link-bar a.secondary:hover { background: var(--border); color: var(--ink); }
+.link-bar a svg { width: 18px; height: 18px; }
+
+@media (max-width: 600px) {
+  .hero-title { font-size: 26px; }
+  .s-title { font-size: 22px; }
+  .chapter-text { font-size: 17px; }
+  .persona-row, .idea-grid { grid-template-columns: 1fr; }
+  .do-dont { grid-template-columns: 1fr; }
+  .key-strip { flex-direction: column; }
+  .key-strip-item { border-right: none; border-bottom: 1px solid var(--border); }
+  .key-strip-item:last-child { border-bottom: none; }
+  .sticky-nav-title { display: none; }
+  .sticky-nav-inner { justify-content: center; }
+  .sticky-nav-links { margin-left: 0; }
+}
+
+@media print {
+  body { font-size: 12px; }
+  section { padding: 2rem 0; }
+  section.tinted { background: #fff; border: none; }
+  .toc, .sticky-nav { display: none; }
+  .takeaway { background: #1e293b; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-name">김유리 · Portfolio</div>
+    <div class="hero-title">0에서 1을,<br>혼돈에서 구조를</div>
+    <div class="hero-sub">흩어진 문제를 발견하고, 여러 층위를 동시에 보며,<br>사람들이 이해할 수 있는 형태로 번역하는 일을 해 왔습니다.</div>
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#case1"><span class="toc-num">01</span>KIPA — AI 대화형 서비스</a>
+  <a href="#case2"><span class="toc-num">02</span>데이터 매거진 & 큐레이션</a>
+  <a href="#career"><span class="toc-num">03</span>콘텐츠의 안쪽에서</a>
+</nav>
+
+<nav class="sticky-nav" id="stickyNav">
+  <div class="sticky-nav-inner">
+    <div class="sticky-nav-title">김유리 · Portfolio</div>
+    <div class="sticky-nav-links">
+      <a href="#case1" data-target="case1">01 KIPA</a>
+      <a href="#case2" data-target="case2">02 매거진</a>
+      <a href="#career" data-target="career">03 콘텐츠</a>
+      <a href="./index.html" style="color:var(--teal);">이력서 →</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section id="case1">
+    <div class="wrap">
+      <div class="s-label">Case 01</div>
+      <div class="s-title">파편화된 플랫폼 경험을 하나로 연결하는<br>AI 컴패니언, KIPA</div>
+
+      <div class="key-strip">
+        <div class="key-strip-item"><div class="key-strip-num">0→1</div><div class="key-strip-label">자발적 제안으로<br>서비스 신규 구축</div></div>
+        <div class="key-strip-item"><div class="key-strip-num">65→88%</div><div class="key-strip-label">응답 정확도</div></div>
+        <div class="key-strip-item"><div class="key-strip-num">2→7인</div><div class="key-strip-label">팀 빌딩</div></div>
+        <div class="key-strip-item"><div class="key-strip-num">v0.5</div><div class="key-strip-label">반복 릴리즈</div></div>
+      </div>
+
+      <div class="chapter">
+        <span class="chapter-tag">문제 정의</span>
+        <span class="chapter-text">파편화된 플랫폼, 길 잃은 사용자를 발견하다</span>
+      </div>
+      <p>KRAFTON의 퍼블리싱 플랫폼은 여러 개의 서비스가 모인 군집형 시스템입니다. 사용자(크리에이터, 파트너)가 필요한 서비스를 찾거나 이용하는 과정에서 겪는 문제가 있었습니다.</p>
+      <ul>
+        <li>서비스 간 이동이 원활하지 않아 <strong>업무 흐름이 단절</strong>되는 상황</li>
+        <li>KOS 및 데이터 관련 <strong>반복 문의</strong>가 담당자에게 집중되는 부하</li>
+        <li>북미 등 <strong>다른 시간대의 사용자</strong>에게 적절한 시간에 답변을 주기 어려운 구조</li>
+        <li>문의 창구가 분산되어 사용자도 담당자도 비효율을 경험</li>
+      </ul>
+      <p>이 문제들은 위에서 내려온 과제가 아니었습니다. 퍼블리싱 플랫폼 전체를 보면서 <mark>사용자를 안내하는 도구 자체가 없다</mark>는 걸 발견하고, <mark>직접 제안</mark>했습니다.</p>
+
+      <div class="chapter">
+        <span class="chapter-tag">전략 수립</span>
+        <span class="chapter-text">챗봇이 아닌 '차세대 인터페이스'로 조직을 설득하다</span>
+      </div>
+      <p>먼저 Confluence에 초기 기획안을 작성했습니다. 프로젝트명 <strong>KIPA (Krafton Intelligent Publishing Assistant)</strong>를 직접 네이밍하고, 배경·목적·핵심 기능·MVP 전략·마일스톤까지 8개 섹션으로 구성했습니다. 이후 관련 부서에 피칭하기 위해 문제 정의부터 시스템 설계, 성공 지표까지 포함한 프레젠테이션을 제작했습니다.</p>
+
+      <p><strong>"왜 챗봇인가"</strong> — 기술 채택의 4단계 프레임워크를 적용했습니다. 웹이 "뭔가요? → 우리도 합니다 → 우선입니다 → 전용입니다"를 거쳤듯, 봇도 같은 채택 곡선 위에 있다는 논리. 챗봇은 단순한 기능 추가가 아니라 <mark>차세대 UX 인터페이스</mark>라는 관점에서 제안했습니다.</p>
+
+      <p><strong>KIPA의 정체성</strong> — "살아 있는 정보들을 연결해 주는 인터페이스"</p>
+      <div class="persona-row">
+        <div class="persona-card"><h4>디지털 내비게이터</h4><p>플랫폼 전체를 연결하고 사용자에게 가장 적합한 방향을 제시</p></div>
+        <div class="persona-card"><h4>콘텐츠 브로커</h4><p>단순 검색이 아니라 서비스·제품·콘텐츠를 연결하고 제공</p></div>
+        <div class="persona-card"><h4>정보 큐레이터</h4><p>맥락 속에서 의미를 구성할 수 있도록 돕고 흐름을 연결</p></div>
+      </div>
+
+      <p><strong>AI 페르소나 설계</strong> — "전문적이지만 친근하게 / 업무 중심적이지만 재치있게"</p>
+      <div class="do-dont">
+        <div class="do">✅ "지금 등록된 문서는 없지만, 비슷한 내용이 여기에 연결되어 있어요."</div>
+        <div class="dont">❌ "해당 정보는 존재하지 않습니다."</div>
+      </div>
+
+      <p><strong>벤치마킹</strong> — Google Assistant, 카카오페이봇, 신한카드 레이, IBK i-ONE봇 등을 직접 사용·분석. <strong>사용자/시스템 플로우, MVP/Beta 프로세스, 성공 지표</strong>까지 포함한 전체 청사진을 제시했습니다.</p>
+
+      <table>
+        <tr><th>단계</th><th>지표</th><th>목표</th></tr>
+        <tr><td>MVP</td><td>FAQ 기반 질문 해결율</td><td>60%+</td></tr>
+        <tr><td>MVP</td><td>챗봇 응답 정확도</td><td>80%+</td></tr>
+        <tr><td>MVP</td><td>반복 문의 감소율</td><td>-20%</td></tr>
+        <tr><td>Beta</td><td>포털 내 챗봇 이용률</td><td>30%+</td></tr>
+        <tr><td>Beta</td><td>업무 처리 속도 향상</td><td>10%+</td></tr>
+      </table>
+
+      <div class="chapter">
+        <span class="chapter-tag warm">기민한 피벗</span>
+        <span class="chapter-text">개발 무산의 위기, 타겟을 전환해 활로를 열다</span>
+      </div>
+      <p>원래 기획은 내부 포털(KPAP)과 외부 사용자(크리에이터) 양쪽을 대상으로 했습니다. 그런데 <mark class="warm">KPAP의 개발이 무산</mark>되었습니다.</p>
+
+      <div class="callout">
+        <strong>제가 내린 판단:</strong> "내부 사용자 편의 기능은 다른 방식으로 풀고, 대외 사용자에 집중하자"<br><br>
+        근거를 정리하여 보고·공유 → 이해관계자 합의 도출 → 팀원들의 기술적 판단 반영 → <mark>"할 수 있는 것과 없는 것"을 구분</mark>하여 새 로드맵 수립
+      </div>
+
+      <p>이 과정에서 해외 SaaS 벤더를 직접 리서치하여 <strong>kapa.ai</strong>를 선정했습니다. OpenAI가 실제로 사용하는 서비스이고, 어드민·분석·API를 모두 갖추고 있으며, 개발 리소스가 부족한 상황에서도 인테그레이션이 간단했습니다. 이후 Slack·이메일로 해외 벤더와 지속 협업했습니다.</p>
+
+      <div class="chapter">
+        <span class="chapter-tag teal">성과 및 확장</span>
+        <span class="chapter-text">데이터로 증명한 대화 품질과 서비스 모듈화</span>
+      </div>
+      <ul>
+        <li>FAQ 50개 + 약관·정책 문서 100여 종 기반 <strong>지식 베이스 구축</strong>, 응답 정확도 <mark class="teal">65→88%</mark> 상승</li>
+        <li>커스텀 위젯 UI 자체 개발, 세그먼트별(비로그인/일반/파트너) 맞춤형 대화 흐름</li>
+        <li>동일 프레임워크를 계정 서비스에 적용 → <strong>멀티 서비스 모듈화</strong></li>
+        <li><strong>2인으로 시작</strong>하여 조직을 설득, <mark class="teal">7인 팀으로 확대</mark>하고 Jira·Confluence 기반 프로젝트 관리 환경을 구축</li>
+        <li>현재 <strong>Proactive AI 컴패니언</strong>으로의 전환 추진 중</li>
+      </ul>
+
+      <div class="takeaway">
+        <h4>이 프로젝트에서 보여주고 싶은 것</h4>
+        <table>
+          <tr><td><strong>문제를 스스로 찾는 사람</strong></td><td>"안내자가 없다"는 문제를 발견하고 직접 제안</td></tr>
+          <tr><td><strong>논리를 세워 설득하는 사람</strong></td><td>채택 프레임워크, 벤치마킹, 페르소나, 플로우, KPI까지 전체 청사진을 설계하고 조직을 설득</td></tr>
+          <tr><td><strong>변화에 대응하는 사람</strong></td><td>KPAP 무산 → 근거 기반 합의 → 팀과 함께 새 로드맵</td></tr>
+          <tr><td><strong>끝까지 만들어내는 사람</strong></td><td>해외 벤더 직접 발굴, v0.1→v0.5, 정확도 65→88%</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="case2" class="tinted">
+    <div class="wrap">
+      <div class="s-label">Case 02</div>
+      <div class="s-title">읽히지 않던 데이터를<br>'가장 소비하기 쉬운 UX'로 재설계하다</div>
+
+      <div class="key-strip">
+        <div class="key-strip-item"><div class="key-strip-num">8호</div><div class="key-strip-label">월간 매거진 발행</div></div>
+        <div class="key-strip-item"><div class="key-strip-num">5개</div><div class="key-strip-label">섹션 구성·기획</div></div>
+        <div class="key-strip-item"><div class="key-strip-num">1인</div><div class="key-strip-label">기획·작성·편집 전담</div></div>
+      </div>
+
+      <div class="chapter">
+        <span class="chapter-tag">페인포인트</span>
+        <span class="chapter-text">데이터 문해력의 진짜 장벽, '막막함'을 짚어내다</span>
+      </div>
+      <p>KRAFTON은 데이터 드리븐 조직을 지향하고 있었지만, 대부분의 구성원이 마주하는 현실은 데이터를 알아야 할 것 같은데 <mark>어디부터 시작해야 할지 모르겠다</mark>는 것이었습니다. 분석 보고서는 존재하지만 흩어져 있고, 찾기 어렵고, 맥락 없이 나열되어 있었습니다.</p>
+      <p>핵심 판단: 데이터 문해력의 출발점은 대시보드나 교육이 아니라, <mark>"읽고 싶은 콘텐츠"라는 형태</mark>로 제공하는 것.</p>
+
+      <div class="chapter">
+        <span class="chapter-tag">솔루션 1</span>
+        <span class="chapter-text">딱딱한 데이터를 소비하기 쉬운 콘텐츠로 번역하다</span>
+      </div>
+      <p>모바일/웹에 최적화, <strong>문학적 언어 중심</strong>으로 데이터 지식을 전달하는 월간 매거진을 기획했습니다.</p>
+
+      <table class="mag-table">
+        <tr><td>기본 용어 정리</td><td>데이터 VOCA</td><td>매월 10개 내외의 데이터 기본 용어를 눈높이에 맞게 정리</td></tr>
+        <tr><td>도서 요약 서비스</td><td>getchar()</td><td>추천 도서를 에디터가 읽고 요약·리뷰</td></tr>
+        <tr><td>보고서 큐레이션</td><td>Report Q-Box</td><td>시의성 있는 이슈와 연결된 분석 보고서를 묶어서 소개</td></tr>
+        <tr><td>인터뷰·사례</td><td>What's in my CLOUD</td><td>우수 협업 사례, 데이터 활용 사례 인터뷰</td></tr>
+        <tr><td>협업 요령</td><td style="font-size:12px">빛 바랜 자의 갈고리 손가락</td><td>협업 가이드를 가독성 높게 재편집</td></tr>
+      </table>
+
+      <p>편집위원회(3인)+편집부(3인)의 운영 체계와, 출판 프로세스(편집회의→원고마감→검토→최종 편집→발행)를 설계했습니다.</p>
+
+      <div class="chapter">
+        <span class="chapter-tag">솔루션 2</span>
+        <span class="chapter-text">흩어진 지식을 엮어내는 탐색형 큐레이션 UX 설계</span>
+      </div>
+
+      <div class="callout">
+        <strong>큐레이션 프로세스</strong><br>
+        사내 공지·홍보자료·커뮤니티 반응·런칭 소식·타운미팅 → <mark>데이터와 연결할 키워드 추출</mark> → 분석 보고서 탐색 → 주제·보고서 선정 → 추천 아티클 작성
+      </div>
+
+      <p>메인 화면(추천 검색어·태그·테마별 큐레이션·분류별 공유), 검색 결과 화면(태그 필터·카드형 결과)까지 <strong>화면 단위로 상세 기획</strong>했습니다.</p>
+
+      <div class="chapter">
+        <span class="chapter-tag teal">레슨런</span>
+        <span class="chapter-text">1인 운영의 한계에서 '지속 가능한 시스템'의 중요성을 배우다</span>
+      </div>
+      <p>구성원 반응은 매우 긍정적이었습니다. <mark class="teal">"친절하고 친근한 어투로 눈높이에 맞는 아티클"</mark>이라는 피드백. 그러나 조직 개편과 리소스 부족으로 중단. 기획·작성·편집을 전부 1인이 수행한 것이 원인이었습니다.</p>
+      <p>이 교훈은 이후 KIPA 프로젝트에서 <strong>"혼자 하지 않는 구조"를 처음부터 설계</strong>하는 데 반영되었습니다.</p>
+
+      <div class="takeaway">
+        <h4>이 프로젝트에서 보여주고 싶은 것</h4>
+        <table>
+          <tr><td><strong>콘텐츠를 서비스 구조로 번역</strong></td><td>흩어진 보고서 → 테마 기반 큐레이션, 데이터 → 읽을 수 있는 매거진</td></tr>
+          <tr><td><strong>편집자 역량의 PM 적용</strong></td><td>출판 프로세스를 사내 데이터 매거진에 그대로 적용</td></tr>
+          <tr><td><strong>실패에서 배우는 사람</strong></td><td>1인 운영의 한계 인식 → 이후 KIPA에서 지속 가능한 구조 설계</td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="career">
+    <div class="wrap">
+      <div class="s-label">Background</div>
+      <div class="s-title">IP의 본질을 꿰뚫고,<br>팬덤의 심리를 프로덕트에 이식하는 기획자</div>
+
+      <div class="key-strip">
+        <div class="key-strip-item"><div class="key-strip-num">24권</div><div class="key-strip-label">IP 시리즈 리뉴얼</div></div>
+        <div class="key-strip-item"><div class="key-strip-num">7년</div><div class="key-strip-label">국제 만화축제</div></div>
+        <div class="key-strip-item"><div class="key-strip-num">11년</div><div class="key-strip-label">레진코믹스 유저</div></div>
+      </div>
+
+      <div class="chapter">
+        <span class="chapter-tag">정보 구조화</span>
+        <span class="chapter-text">24권의 IP 시리즈, 파편화된 콘텐츠를 체계화하다</span>
+      </div>
+      <p><strong>금성출판사 (2014–2017)</strong> — 어린이·교육 월간지 3종을 1인 체제로 기획·편집·취재. 가장 큰 프로젝트는 <strong>《오! 한국사 인물 만화》 전 24권 리뉴얼</strong>이었습니다.</p>
+      <ul>
+        <li>시대 변화에 따른 서술의 공정성, 새로운 사실, 오류를 전권에 걸쳐 검토</li>
+        <li>시대별 나열 → <strong>테마·주제 중심으로 원고 재배열</strong></li>
+        <li>인물·사건을 <strong>정보시각화한 연표를 새로운 콘텐츠로 기획·추가</strong></li>
+      </ul>
+      <p>24권짜리 시리즈에서 하나의 판단이 전체 구조에 파급됩니다. 이 경험은 이후 <mark>"여러 서비스가 얽힌 플랫폼 전체의 구조를 설계하는 일"</mark>에 그대로 연결되었습니다.</p>
+      <p>월간지 운영에서 가장 어려운 건 업무량이 아니라 <strong>아이디어 고갈</strong>이었습니다. 3달치 아이템 사전 정리, 매일 아침 뉴스 클리핑·서점 모니터링 루틴화 — "감"이 아니라 "체계"로 콘텐츠를 만드는 습관은 이때 형성되었습니다.</p>
+
+      <div class="chapter">
+        <span class="chapter-tag">경험 설계</span>
+        <span class="chapter-text">기획자의 의도와 사용자의 실제 경험 사이의 간극을 좁히다</span>
+      </div>
+      <p><strong>부천국제만화축제 (2007–2013)</strong> — 7년간 홍보·마케팅 PD. 우리가 가장 많이 고민한 건 하나였습니다. <mark>"관람객이 만화 속으로 직접 들어오는 일체감을 어떻게 만들 것인가."</mark></p>
+      <ul>
+        <li>어떤 해에는 인터랙티브 경험에 집중, 어떤 해에는 "병맛" 테마로 친근한 참여형 전시·이벤트</li>
+        <li>기자회견에서도 "만화로 들어오는 느낌"을 어떻게 전달할지 고민</li>
+        <li>축제 데일리 발행, 작가·관계자·독자·일반 관람객 직접 인터뷰</li>
+      </ul>
+      <p>SNS에서 관람객 반응을 연구하며 <strong>"기획자가 의도한 경험"과 "관람객이 실제로 하는 경험" 사이의 차이</strong>를 현장에서 반복적으로 확인했습니다. 이 경험은 이후 서비스를 기획할 때 <strong>"사용자가 실제로 어떻게 쓸 것인가"를 설계 초기부터 고려하는 습관</strong>으로 이어졌습니다.</p>
+
+      <div class="quote">
+        키다리스튜디오가 "독자가 원작의 '소비자'를 넘어 세계관 속 '플레이어'가 되는 경험"을 만들고 있다고 했을 때, 이 문장이 낯설지 않았던 건 7년간 바로 그 질문을 안고 일했기 때문입니다.
+      </div>
+
+      <div class="chapter">
+        <span class="chapter-tag teal">도메인 인사이트</span>
+        <span class="chapter-text">11년 차 헤비 유저로서의 서비스 감각</span>
+      </div>
+      <p><strong>레진코믹스</strong>(2015~) 11년, <strong>봄툰</strong>(2017~) 9년 사용. 소장 작품 500여 편 이상. 여성향 IP의 독자 심리와 팬덤 구조를 실사용자 관점에서 이해하고 있으며, 웹툰 창작자 커뮤니티와의 접점도 보유하고 있습니다.</p>
+
+      <p style="margin-top:2rem; font-weight:700; color:var(--ink);">유저로서 상상한 서비스들</p>
+      
+      <div class="idea-grid">
+        <div class="idea-card">
+          <span class="idea-icon">💬</span>
+          <h4>IP 캐릭터 챗봇</h4>
+          <p>공식 캐릭터가 이미 있으니, "이런 스타일 추천해 줘"라고 하면 작품을 대화창에서 직접 나열. IP를 협조 받아 캐릭터를 선택하고, 그 캐릭터에 맞는 말투로 대화할 수 있으면 더 좋겠다는 생각</p>
+        </div>
+        <div class="idea-card">
+          <span class="idea-icon">🔴</span>
+          <h4>캐릭터 라이브</h4>
+          <p>위버스처럼 캐릭터가 직접 응답하는 세션. 사전에 작가가 커스텀 질답 세트와 페르소나를 잘 만들어 두고 QA만 적절히 거치면 충분히 가능할 것</p>
+        </div>
+        <div class="idea-card">
+          <span class="idea-icon">📊</span>
+          <h4>내 도파민 찾기 대시보드</h4>
+          <p>내가 어떤 장르·태그·작가에 돈을 많이 썼는지, 몰아보기 패턴은 어떤지, 나의 소비 성향을 시각화해 주는 개인화 대시보드. 스포티파이 Wrapped처럼 연말에 "올해 당신의 웹툰 취향"을 정리해 주거나, 소비 패턴 기반으로 다음 작품을 추천하는 데 활용할 수 있을 것</p>
+        </div>
+      </div>
+
+      <p><strong>아쉬운 점</strong></p>
+      <ul>
+        <li>작품 소개의 정확성. 키워드에서 느껴져야 할 핵심이 안 느껴지거나, 읽고 나서도 무슨 내용인지 모르겠는 소개가 적지 않음</li>
+      </ul>
+      <p><strong>오래된 만화 독자로서의 바람</strong></p>
+      <ul>
+        <li>작가 인터뷰나 고밀도의 작품 리뷰 같은 매거진 기능. 웹툰 소비자 연령대가 올라가고 있는 만큼, 꼭 플랫폼에 직접 서비스를 추가하지 않더라도 이런 콘텐츠가 소구력을 발휘하는 작품은 분명 있을 것입니다</li>
+      </ul>
+
+      <div class="quote">
+        이 목록은 키다리스튜디오의 JD를 읽기 전에 이미 가지고 있던 생각입니다. "캐릭터와 관계를 쌓는 컴패니언 경험"과 "IP 기반 인터랙티브 서비스"는 독자로서 오래 바라 온 것이기도 합니다.
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="link-bar">
+      <a href="./index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
+        이력서 보기
+      </a>
+      <a href="mailto:yuri@example.com" class="secondary">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        이메일 보내기
+      </a>
+    </div>
+    김유리 · Portfolio · 2026
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('stickyNav');
+const tocEl = document.querySelector('.toc');
+
+function updateNav() {
+  if (tocEl) {
+    const tocBottom = tocEl.getBoundingClientRect().bottom;
+    nav.classList.toggle('visible', tocBottom < 0);
+  }
+  nav.classList.toggle('scrolled', window.scrollY > 100);
+}
+window.addEventListener('scroll', updateNav);
+updateNav();
+
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.sticky-nav-links a');
+
+function updateActive() {
+  let current = '';
+  sections.forEach(section => {
+    const top = section.offsetTop - 140;
+    if (window.scrollY >= top) current = section.id;
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.dataset.target === current);
+  });
+}
+window.addEventListener('scroll', updateActive);
+updateActive();
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', (e) => {
+    e.preventDefault();
+    const targetId = link.getAttribute('href').substring(1);
+    const target = document.getElementById(targetId);
+    if (target) {
+      const offset = 120;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
